@@ -1,0 +1,1441 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guía de orientación — Ley de Utilidad Pública</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --lavanda: #7C6FC4;
+  --lavanda-light: #EAE7F8;
+  --lavanda-dark: #5a4fa0;
+  --verde: #3DAB8E;
+  --verde-light: #E1F5EE;
+  --rosado: #E07090;
+  --rosado-mid: #e88aa0;
+  --rosado-light: #FBEAF0;
+  --rosado-dark: #b5506a;
+  --naranja: #E8854A;
+  --naranja-light: #FDF0E8;
+  --crema: #FDF5EC;
+  --texto: #3D2B1F;
+  --texto-suave: #7A6059;
+  --blanco: #ffffff;
+}
+
+html, body {
+  font-family: 'Open Sans', sans-serif;
+  background: var(--crema);
+  color: var(--texto);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ── CANVAS MARIPOSAS ── */
+#bfly-canvas {
+  position: fixed; top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none; z-index: 0;
+}
+
+/* ── LAYOUT ── */
+.page {
+  position: relative; z-index: 1;
+  max-width: 480px;
+  margin: 0 auto;
+  padding-bottom: 3rem;
+}
+
+/* ══ HEADER ══ */
+.header {
+  background: linear-gradient(135deg, var(--rosado) 0%, #c85878 100%);
+  padding: 2.4rem 1.6rem 3rem;
+  border-radius: 0 0 2.2rem 2.2rem;
+  position: relative; overflow: hidden;
+  text-align: center;
+}
+.header-deco1 {
+  position: absolute; top: -40px; right: -40px;
+  width: 140px; height: 140px; border-radius: 50%;
+  background: rgba(255,255,255,0.08);
+}
+.header-deco2 {
+  position: absolute; bottom: -28px; left: -28px;
+  width: 100px; height: 100px; border-radius: 50%;
+  background: rgba(255,255,255,0.05);
+}
+.header-deco3 {
+  position: absolute; top: 50%; right: 5%;
+  width: 60px; height: 60px; border-radius: 50%;
+  background: rgba(255,255,255,0.06);
+}
+.header-tag {
+  display: inline-block;
+  background: rgba(255,255,255,0.2);
+  color: white;
+  font-family: 'Nunito', sans-serif;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 0.09em; text-transform: uppercase;
+  padding: 4px 13px; border-radius: 20px;
+  margin-bottom: 0.85rem;
+}
+.header h1 {
+  font-family: 'Nunito', sans-serif;
+  font-size: 26px; font-weight: 900;
+  color: white; line-height: 1.2;
+  margin-bottom: 0.35rem;
+  text-align: center;
+}
+.header-sub {
+  font-family: 'Nunito', sans-serif;
+  font-size: 13px; font-weight: 600;
+  color: rgba(255,255,255,0.8);
+  margin-bottom: 0.8rem;
+  letter-spacing: 0.01em;
+  text-align: center;
+}
+.header p {
+  font-size: 13.5px;
+  color: rgba(255,255,255,0.85);
+  line-height: 1.65;
+}
+.header-bfly {
+  position: absolute; top: 1.4rem; right: 1.6rem;
+  opacity: 0.25;
+  animation: flapH 2s ease-in-out infinite alternate;
+  transform-origin: center;
+}
+@keyframes flapH {
+  from { transform: scaleX(1); }
+  to   { transform: scaleX(0.22); }
+}
+
+/* ── SALUDO ── */
+.greeting {
+  margin: 1.4rem 1.4rem 0;
+  background: white;
+  border-radius: 1.1rem;
+  padding: 1.1rem 1.25rem;
+  border-left: 4px solid var(--rosado);
+  box-shadow: 0 2px 14px rgba(124,111,196,0.07);
+}
+.greeting p {
+  font-size: 13.5px; line-height: 1.75;
+  color: var(--texto-suave);
+}
+.greeting strong { color: var(--texto); font-weight: 600; }
+
+/* ── SECTION LABEL ── */
+.section-label {
+  font-family: 'Nunito', sans-serif;
+  font-size: 13.5px; font-weight: 700;
+  color: var(--lavanda);
+  text-transform: uppercase; letter-spacing: 0.09em;
+  padding: 1.7rem 1.4rem 0.75rem;
+}
+
+/* ── MENU GRID ── */
+.menu-grid {
+  padding: 0 1.4rem;
+  display: flex; flex-direction: column; gap: 0.6rem;
+}
+
+.menu-btn {
+  display: flex; align-items: center; gap: 0.9rem;
+  background: white; border: none; border-radius: 1rem;
+  padding: 0.95rem 1.1rem; cursor: pointer;
+  text-align: left; width: 100%;
+  box-shadow: 0 2px 10px rgba(61,43,31,0.055);
+  transition: transform 0.19s cubic-bezier(.34,1.56,.64,1), box-shadow 0.18s ease;
+  text-decoration: none; color: var(--texto);
+}
+.menu-btn:hover  { transform: translateY(-2px) scale(1.01); box-shadow: 0 5px 18px rgba(124,111,196,0.14); }
+.menu-btn:active { transform: scale(0.97); }
+
+.btn-ico {
+  width: 44px; height: 44px; border-radius: 0.8rem;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.btn-txt { flex: 1; }
+.btn-txt strong {
+  display: block;
+  font-family: 'Nunito', sans-serif;
+  font-size: 13.5px; font-weight: 700; margin-bottom: 2px;
+}
+.btn-txt span { font-size: 11.5px; color: var(--texto-suave); line-height: 1.4; }
+.btn-chev { color: var(--texto-suave); opacity: 0.4; flex-shrink: 0; }
+
+.ico-rosado  { background: var(--rosado-light); }
+.ico-lavanda { background: var(--lavanda-light); }
+.ico-verde   { background: var(--verde-light); }
+.ico-naranja { background: var(--naranja-light); }
+.ico-azul    { background: #E8F2FD; }
+.ico-amarillo{ background: #FEF9E7; }
+.ico-rojo    { background: #FDECEC; }
+.ico-teal    { background: #E0F4F1; }
+
+/* ── EXPANDED SECTIONS ── */
+.expanded {
+  margin: 1.4rem 1.4rem 0;
+  background: white; border-radius: 1.2rem;
+  overflow: hidden;
+  box-shadow: 0 2px 14px rgba(124,111,196,0.08);
+  display: none;
+  animation: slideUp 0.35s ease both;
+}
+.exp-hdr {
+  padding: 1.3rem 1.4rem;
+  display: flex; align-items: center; gap: 0.85rem;
+}
+.exp-hdr h2 {
+  font-family: 'Nunito', sans-serif;
+  font-size: 17px; font-weight: 800; color: white;
+}
+.exp-body { padding: 1.3rem 1.4rem; }
+.exp-body > p, .exp-body p.intro-p {
+  font-size: 13px; line-height: 1.78;
+  color: var(--texto-suave); margin-bottom: 0.9rem;
+}
+.exp-body strong { color: var(--texto); font-weight: 600; }
+
+/* SUBSECTION HEADING — más grande */
+.sub-h {
+  font-family: 'Nunito', sans-serif;
+  font-size: 15.5px; font-weight: 800;
+  color: var(--texto);
+  margin: 1.6rem 0 0.6rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 2px solid var(--lavanda-light);
+}
+.sub-h-rosado { border-color: var(--rosado-light); }
+
+/* ── DIR BUTTON ── */
+.dir-btn {
+  display: flex; align-items: center; gap: 0.65rem;
+  font-family: 'Nunito', sans-serif;
+  font-size: 13px; font-weight: 700;
+  padding: 0.75rem 1rem; border-radius: 0.8rem;
+  text-decoration: none; border: none; cursor: pointer;
+  width: 100%; margin-top: 0.5rem;
+  transition: transform 0.18s cubic-bezier(.34,1.56,.64,1);
+}
+.dir-btn:active { transform: scale(0.97); }
+.dir-rosado { background: var(--rosado-light); color: var(--rosado-dark); }
+.dir-rosado:hover { background: #f4bfce; }
+.dir-verde  { background: var(--verde-light); color: #0F6E56; }
+.dir-verde:hover  { background: #9fe1cb; }
+.dir-lavanda{ background: var(--lavanda-light); color: var(--lavanda-dark); }
+.dir-lavanda:hover{ background: #d0cbf0; }
+.dir-naranja{ background: var(--naranja-light); color: #8a4010; }
+.dir-naranja:hover{ background: #fcdcbb; }
+
+/* ── LÍNEAS ── */
+/* Different tints for each card */
+.linea-card {
+  border-radius: 0.9rem; padding: 1rem 1.1rem;
+  margin-bottom: 0.7rem;
+}
+.lc-1 { background: #FDF0F5; border: 1px solid rgba(224,112,144,0.18); }
+.lc-2 { background: #F4F0FD; border: 1px solid rgba(124,111,196,0.18); }
+.lc-3 { background: #F0FAF6; border: 1px solid rgba(61,171,142,0.18); }
+.lc-4 { background: #FEF6F0; border: 1px solid rgba(232,133,74,0.18); }
+.lc-5 { background: #F0F5FD; border: 1px solid rgba(58,134,200,0.18); }
+
+.linea-name {
+  font-family: 'Nunito', sans-serif;
+  font-size: 14px; font-weight: 800; color: var(--texto); margin-bottom: 0.25rem;
+}
+.linea-desc { font-size: 12px; color: var(--texto-suave); margin-bottom: 0.4rem; line-height: 1.5; }
+.linea-horario { font-size: 11px; color: var(--verde); font-weight: 700; margin-bottom: 0.55rem; }
+
+.chips { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.chip {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 5px 11px; border-radius: 20px;
+  font-size: 11.5px; font-weight: 600;
+  text-decoration: none;
+  transition: transform 0.14s;
+}
+.chip:active { transform: scale(0.95); }
+.chip svg { width: 13px; height: 13px; flex-shrink: 0; }
+.chip-tel  { background: var(--lavanda-light); color: var(--lavanda-dark); }
+.chip-wa   { background: #E8F8F0; color: #1a7a4a; }
+.chip-mail { background: var(--naranja-light); color: #a0540a; }
+.chip-ig   { background: #FCE4EC; color: #880E4F; }
+
+/* ── IMP BOX ── */
+.imp-box {
+  background: var(--lavanda-light);
+  border-left: 4px solid var(--lavanda);
+  border-radius: 0 0.8rem 0.8rem 0;
+  padding: 1rem 1.1rem; margin-bottom: 1rem;
+}
+.imp-box.rosado-box {
+  background: var(--rosado-light);
+  border-left-color: var(--rosado);
+}
+.imp-box.naranja-box {
+  background: var(--naranja-light);
+  border-left-color: var(--naranja);
+}
+.imp-title {
+  font-family: 'Nunito', sans-serif;
+  font-size: 13px; font-weight: 800;
+  color: var(--lavanda-dark); margin-bottom: 0.4rem;
+  display: flex; align-items: center; gap: 0.45rem;
+}
+.imp-title.rosado-t { color: var(--rosado-dark); }
+.imp-title.naranja-t { color: #8a4010; }
+.imp-box p { font-size: 12.5px; line-height: 1.65; color: #4a3d8a; margin: 0; }
+.imp-box.rosado-box p { color: #7a3048; }
+.imp-box.naranja-box p { color: #6a3410; }
+
+/* ── CALCULADORA ── */
+.calc-wrap {
+  background: var(--crema); border-radius: 1rem;
+  padding: 1.2rem; margin: 0.8rem 0;
+  border: 1.5px dashed rgba(124,111,196,0.28);
+}
+.calc-title {
+  font-family: 'Nunito', sans-serif;
+  font-size: 13px; font-weight: 800;
+  color: var(--lavanda-dark); margin-bottom: 1rem;
+  display: flex; align-items: center; gap: 0.5rem;
+}
+.calc-steps {
+  display: flex; gap: 0.5rem;
+  margin-bottom: 0.9rem;
+  overflow-x: auto; padding-bottom: 4px;
+}
+.calc-step {
+  flex-shrink: 0;
+  background: white; border-radius: 0.7rem;
+  padding: 0.6rem 0.75rem;
+  font-size: 11.5px; color: var(--texto-suave);
+  border: 1px solid var(--lavanda-light);
+  min-width: 80px; text-align: center;
+}
+.calc-step strong {
+  display: block; font-family: 'Nunito', sans-serif;
+  font-size: 13px; color: var(--lavanda-dark); margin-bottom: 2px;
+}
+.calc-step .op {
+  font-size: 16px; color: var(--lavanda);
+  font-weight: 800; margin: 0 4px;
+}
+.calc-input-row {
+  display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.8rem;
+}
+.calc-input-row label { font-size: 12.5px; color: var(--texto-suave); white-space: nowrap; flex-shrink: 0; }
+.calc-input-row select {
+  flex: 1; padding: 8px 10px;
+  border: 1.5px solid rgba(124,111,196,0.28);
+  border-radius: 0.6rem;
+  font-family: 'Open Sans', sans-serif; font-size: 13px;
+  background: white; color: var(--texto); cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24'%3E%3Cpath fill='%237C6FC4' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 8px center; padding-right: 28px;
+}
+.calc-res {
+  background: var(--lavanda); border-radius: 0.8rem;
+  padding: 0.9rem 1rem; text-align: center;
+}
+.calc-res .rl { font-size: 11px; color: rgba(255,255,255,0.78); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.2rem; }
+.calc-res .rv { font-family: 'Nunito', sans-serif; font-size: 23px; font-weight: 800; color: white; }
+.calc-res .rs { font-size: 11px; color: rgba(255,255,255,0.72); margin-top: 0.2rem; }
+
+/* ── FMT BUTTON ── */
+.fmt-btn {
+  display: flex; align-items: center; gap: 0.75rem;
+  background: white; border: 1.5px solid var(--lavanda-light);
+  border-radius: 0.9rem; padding: 0.9rem 1rem;
+  cursor: pointer; width: 100%; text-align: left;
+  transition: transform 0.18s cubic-bezier(.34,1.56,.64,1), box-shadow 0.15s;
+  margin-top: 0.5rem; text-decoration: none; color: var(--texto);
+}
+.fmt-btn:hover  { box-shadow: 0 3px 14px rgba(124,111,196,0.13); }
+.fmt-btn:active { transform: scale(0.97); }
+.fmt-ico {
+  width: 38px; height: 38px; background: var(--lavanda-light);
+  border-radius: 0.65rem;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.fmt-ico.verde { background: var(--verde-light); }
+.fmt-ico.rosado { background: var(--rosado-light); }
+.fmt-txt strong { display: block; font-family: 'Nunito', sans-serif; font-size: 13px; font-weight: 700; color: var(--texto); }
+.fmt-txt span   { font-size: 11px; color: var(--texto-suave); }
+
+/* ── PASOS SISBEN ── */
+.step-list { display: flex; flex-direction: column; gap: 0.7rem; margin: 0.8rem 0; }
+.step-item {
+  display: flex; align-items: flex-start; gap: 0.8rem;
+  background: var(--crema); border-radius: 0.85rem; padding: 0.9rem 1rem;
+}
+.step-num {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: var(--verde); color: white;
+  font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 13px;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.step-txt strong { display: block; font-family: 'Nunito', sans-serif; font-size: 13px; font-weight: 700; margin-bottom: 2px; }
+.step-txt span { font-size: 12px; color: var(--texto-suave); line-height: 1.5; }
+
+/* ── EMPRENDIMIENTO PREVIEW ── */
+.emp-preview {
+  background: linear-gradient(135deg, #0F6E56 0%, #3DAB8E 100%);
+  border-radius: 1rem; padding: 1.2rem 1.2rem 1rem;
+  margin: 0.8rem 0; position: relative; overflow: hidden;
+}
+.emp-preview::before {
+  content: ''; position: absolute; top: -20px; right: -20px;
+  width: 80px; height: 80px; border-radius: 50%;
+  background: rgba(255,255,255,0.08);
+}
+.emp-preview h3 {
+  font-family: 'Nunito', sans-serif; font-size: 14px; font-weight: 800;
+  color: white; margin-bottom: 0.4rem;
+}
+.emp-preview p {
+  font-size: 12px; color: rgba(255,255,255,0.82); line-height: 1.55; margin-bottom: 0.8rem !important;
+}
+.emp-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.8rem; }
+.emp-tag {
+  background: rgba(255,255,255,0.18); color: white;
+  font-size: 10.5px; font-weight: 600;
+  padding: 3px 9px; border-radius: 12px;
+}
+
+/* ── BACK BTN ── */
+.back-btn {
+  display: flex; align-items: center; gap: 0.75rem;
+  background: var(--crema); border: none; border-radius: 1rem;
+  padding: 0.9rem 1.1rem; cursor: pointer; width: 100%;
+  margin-top: 1.3rem;
+  transition: transform 0.18s cubic-bezier(.34,1.56,.64,1);
+}
+.back-btn:active { transform: scale(0.97); }
+.back-btn span { font-family: 'Nunito', sans-serif; font-size: 14px; font-weight: 700; color: var(--texto); }
+.back-ico {
+  width: 38px; height: 38px; background: var(--lavanda-light);
+  border-radius: 0.7rem;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+
+/* ── FOOTER ── */
+.footer { margin-top: 2rem; padding: 1.5rem; text-align: center; }
+.footer-bfly {
+  display: flex; justify-content: center; margin-bottom: 0.65rem;
+  opacity: 0.28;
+  animation: flapH 2.2s ease-in-out infinite alternate;
+  transform-origin: center;
+}
+.footer p { font-size: 11.5px; color: var(--texto-suave); line-height: 1.65; }
+
+/* ── ANIMATIONS ── */
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.header        { animation: slideUp 0.45s ease both; }
+.greeting      { animation: slideUp 0.45s ease 0.08s both; }
+.section-label { animation: slideUp 0.45s ease 0.12s both; }
+.menu-btn:nth-child(1)  { animation: slideUp 0.38s ease 0.15s both; }
+.menu-btn:nth-child(2)  { animation: slideUp 0.38s ease 0.19s both; }
+.menu-btn:nth-child(3)  { animation: slideUp 0.38s ease 0.23s both; }
+.menu-btn:nth-child(4)  { animation: slideUp 0.38s ease 0.27s both; }
+.menu-btn:nth-child(5)  { animation: slideUp 0.38s ease 0.31s both; }
+.menu-btn:nth-child(6)  { animation: slideUp 0.38s ease 0.35s both; }
+.menu-btn:nth-child(7)  { animation: slideUp 0.38s ease 0.39s both; }
+.menu-btn:nth-child(8)  { animation: slideUp 0.38s ease 0.43s both; }
+.menu-btn:nth-child(9)  { animation: slideUp 0.38s ease 0.47s both; }
+
+/* ══════════════════════════════════════
+   RESPONSIVE — DESKTOP
+══════════════════════════════════════ */
+@media (min-width: 700px) {
+  .page { max-width: 100%; }
+
+  .header {
+    border-radius: 0;
+    padding: 3rem 10% 3.5rem;
+    text-align: center;
+  }
+  .header h1 { font-size: 36px; max-width: 600px; margin-left: auto; margin-right: auto; }
+  .header-sub { font-size: 15px; margin-left: auto; margin-right: auto; }
+  .header p { font-size: 15px; max-width: 540px; margin-left: auto; margin-right: auto; }
+  .header-bfly { right: 8%; top: 2rem; transform: scale(1.4); transform-origin: top right; }
+
+  /* greeting + label centrados con margen */
+  .greeting {
+    max-width: 760px; margin: 1.8rem auto 0;
+    margin-left: auto; margin-right: auto;
+  }
+  .section-label { max-width: 800px; margin: 0 auto; padding-left: 0; padding-right: 0; text-align: center; }
+
+  /* GRID 2 columnas en desktop */
+  .menu-grid {
+    max-width: 800px; margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.8rem;
+    padding: 0 1.4rem;
+  }
+
+  /* expanded sections centradas */
+  .expanded {
+    max-width: 760px; margin-left: auto; margin-right: auto;
+  }
+
+  /* lineas en grid 2 col */
+  .lineas-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem;
+  }
+  .lineas-grid .linea-card { margin-bottom: 0; }
+
+  /* pasos en fila */
+  .step-list { flex-direction: row; flex-wrap: wrap; }
+  .step-item { flex: 1; min-width: 180px; }
+}
+
+/* SVG helpers inline */
+svg.ico { display: block; }
+</style>
+</head>
+<body>
+
+<canvas id="bfly-canvas"></canvas>
+
+<div class="page">
+
+<!-- ══ HEADER ══ -->
+<div class="header">
+  <div class="header-deco1"></div>
+  <div class="header-deco2"></div>
+  <div class="header-deco3"></div>
+  <div class="header-tag" style="display:block;text-align:center;">Ley 2292 de 2023 · Utilidad Pública</div>
+  <h1 style="text-align:center;">Guía de orientación</h1>
+  <p class="header-sub" style="text-align:center;">Rutas de apoyo · Preguntas frecuentes · Dirigido a mujeres beneficiarias de la Ley</p>
+  <div class="header-bfly">
+    <svg width="52" height="44" viewBox="0 0 60 50" fill="none">
+      <path d="M30 26 C20 12 2 8 1 18 C-1 27 14 32 30 26Z" fill="white"/>
+      <path d="M30 26 C40 12 58 8 59 18 C61 27 46 32 30 26Z" fill="white"/>
+      <path d="M30 26 C19 34 3 37 2 28 C1 21 16 19 30 26Z" fill="rgba(255,255,255,0.5)"/>
+      <path d="M30 26 C41 34 57 37 58 28 C59 21 44 19 30 26Z" fill="rgba(255,255,255,0.5)"/>
+      <ellipse cx="30" cy="26" rx="2.5" ry="4" fill="rgba(255,255,255,0.9)"/>
+      <line x1="30" y1="22" x2="26" y2="15" stroke="white" stroke-width="1.2" stroke-linecap="round"/>
+      <line x1="30" y1="22" x2="34" y2="15" stroke="white" stroke-width="1.2" stroke-linecap="round"/>
+      <circle cx="26" cy="14" r="1.5" fill="white"/>
+      <circle cx="34" cy="14" r="1.5" fill="white"/>
+    </svg>
+  </div>
+</div>
+
+<!-- ══ SALUDO ══ -->
+<div class="greeting">
+  <p>Reconocemos que estás atravesando muchos cambios en este momento. Aquí encontrarás información clara y accesible sobre tus derechos, rutas de atención y recursos de apoyo.</p>
+  <p style="margin-top:0.6rem;">Selecciona lo que necesitas y te guiaremos paso a paso. <strong>Este espacio es tuyo</strong>, toda la información es gratuita y confidencial.</p>
+</div>
+
+<p class="section-label">¿Qué necesitas?</p>
+
+<!-- ══ MENÚ ══ -->
+<div class="menu-grid" id="main-menu">
+
+  <button class="menu-btn" onclick="show('psico')">
+    <div class="btn-ico ico-rosado">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#E07090" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+      </svg>
+    </div>
+    <div class="btn-txt">
+      <strong>Apoyo emocional y psicológico</strong>
+      <span>Líneas de ayuda y consultorios</span>
+    </div>
+    <svg class="btn-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
+  </button>
+
+  <button class="menu-btn" onclick="show('juridico')">
+    <div class="btn-ico ico-lavanda">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#7C6FC4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="8 6 21 6"/><polyline points="8 12 21 12"/><polyline points="8 18 21 18"/>
+        <line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/>
+      </svg>
+    </div>
+    <div class="btn-txt">
+      <strong>Dudas sobre mi situación jurídica</strong>
+      <span>Formatos y trámites judiciales</span>
+    </div>
+    <svg class="btn-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
+  </button>
+
+  <button class="menu-btn" onclick="show('horas')">
+    <div class="btn-ico ico-verde">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3DAB8E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+      </svg>
+    </div>
+    <div class="btn-txt">
+      <strong>Mis horas de utilidad pública</strong>
+      <span>Consulta horas pendientes</span>
+    </div>
+    <svg class="btn-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
+  </button>
+
+  <button class="menu-btn" onclick="show('cambios')">
+    <div class="btn-ico ico-naranja">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#E8854A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+      </svg>
+    </div>
+    <div class="btn-txt">
+      <strong>Cambiar condiciones de mis servicios</strong>
+      <span>Plaza, domicilio o actividades</span>
+    </div>
+    <svg class="btn-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
+  </button>
+
+  <button class="menu-btn" onclick="show('sisben')">
+    <div class="btn-ico ico-azul">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3a86c8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+        <circle cx="9" cy="7" r="4"/>
+        <path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+      </svg>
+    </div>
+    <div class="btn-txt">
+      <strong>Afiliarme al SISBÉN</strong>
+      <span>Pasos para la afiliación</span>
+    </div>
+    <svg class="btn-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
+  </button>
+
+  <button class="menu-btn" onclick="show('cedula')">
+    <div class="btn-ico ico-amarillo">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#b8860b" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="2" y="5" width="20" height="14" rx="2"/>
+        <circle cx="8" cy="12" r="2"/>
+        <path d="M14 9h4M14 12h4M14 15h2"/>
+      </svg>
+    </div>
+    <div class="btn-txt">
+      <strong>Duplicado de mi cédula</strong>
+      <span>Solicitud y trámite</span>
+    </div>
+    <svg class="btn-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
+  </button>
+
+  <button class="menu-btn" onclick="show('emprendimiento')">
+    <div class="btn-ico ico-verde">
+      <!-- Flor -->
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3DAB8E" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="3"/>
+        <path d="M12 2a2.5 2.5 0 0 1 0 5 2.5 2.5 0 0 1 0-5z"/>
+        <path d="M12 17a2.5 2.5 0 0 1 0 5 2.5 2.5 0 0 1 0-5z"/>
+        <path d="M2 12a2.5 2.5 0 0 1 5 0 2.5 2.5 0 0 1-5 0z"/>
+        <path d="M17 12a2.5 2.5 0 0 1 5 0 2.5 2.5 0 0 1-5 0z"/>
+        <path d="M4.22 4.22a2.5 2.5 0 0 1 3.54 3.54 2.5 2.5 0 0 1-3.54-3.54z"/>
+        <path d="M16.24 16.24a2.5 2.5 0 0 1 3.54 3.54 2.5 2.5 0 0 1-3.54-3.54z"/>
+        <path d="M4.22 19.78a2.5 2.5 0 0 1 3.54-3.54 2.5 2.5 0 0 1-3.54 3.54z"/>
+        <path d="M16.24 7.76a2.5 2.5 0 0 1 3.54-3.54 2.5 2.5 0 0 1-3.54 3.54z"/>
+      </svg>
+    </div>
+    <div class="btn-txt">
+      <strong>Fortalecer mi emprendimiento</strong>
+      <span>Convocatorias y recursos</span>
+    </div>
+    <svg class="btn-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
+  </button>
+
+  <button class="menu-btn" onclick="show('hoja')">
+    <div class="btn-ico ico-lavanda">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#7C6FC4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+        <polyline points="14 2 14 8 20 8"/>
+        <line x1="16" y1="13" x2="8" y2="13"/>
+        <line x1="16" y1="17" x2="8" y2="17"/>
+        <polyline points="10 9 9 9 8 9"/>
+      </svg>
+    </div>
+    <div class="btn-txt">
+      <strong>Cómo hacer mi hoja de vida</strong>
+      <span>Guía y plantilla descargable</span>
+    </div>
+    <svg class="btn-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
+  </button>
+
+  <button class="menu-btn" onclick="show('eps')">
+    <div class="btn-ico ico-rojo">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#c0392b" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+      </svg>
+    </div>
+    <div class="btn-txt">
+      <strong>Dificultades con mi EPS</strong>
+      <span>Qué hacer y a quién llamar</span>
+    </div>
+    <svg class="btn-chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
+  </button>
+
+</div><!-- /menu-grid -->
+
+
+<!-- ═══════════════════════════════════════
+  SEC 1 — APOYO PSICOLÓGICO
+═══════════════════════════════════════ -->
+<div class="expanded" id="sec-psico">
+  <div class="exp-hdr" style="background:linear-gradient(135deg,#E07090,#c0506a);">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+    <h2>Apoyo emocional y psicológico</h2>
+  </div>
+  <div class="exp-body">
+    <p>Reconocemos que estás atravesando por muchos cambios en este momento y que, a veces, eso se puede sentir difícil y abrumador. Es importante reconocer tus emociones y sentimientos, ese es el primer paso para pedir apoyo. <strong>Hay espacios y personas que te escucharán. Ese espacio existe y lo mereces.</strong></p>
+
+    <div class="sub-h sub-h-rosado">Consultorios y centros psicológicos universitarios</div>
+    <p>También existen consultorios y centros de atención psicológica de universidades en Colombia que ofrecen orientación, evaluación y acompañamiento profesional. Dependiendo de la institución, pueden ser gratuitos o de bajo costo.</p>
+    <a href="https://mutante.org/contenidos/directorio-de-centros-de-atencion-psicologica-de-universidades-en-colombia/" target="_blank" class="dir-btn dir-verde">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      Ver directorio de consultorios universitarios
+    </a>
+
+    <div class="sub-h sub-h-rosado" style="margin-top:1.8rem;">Líneas telefónicas gratuitas</div>
+    <p>Llama o escribe cuando lo necesites. Todas son gratuitas.</p>
+    <a href="https://www.colpsic.org.co/wp-content/uploads/2021/08/Directorio-salud-mental-Colombia.pdf" target="_blank" class="dir-btn dir-rosado" style="margin-bottom:1rem;">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      Ver directorio de salud mental en Colombia
+    </a>
+
+    <div class="lineas-grid">
+      <div class="linea-card lc-1">
+        <div class="linea-name">Línea 106</div>
+        <div class="linea-desc">Crisis emocional, ansiedad e ideación suicida.</div>
+        <div class="linea-horario">24 horas, todos los días</div>
+        <div class="chips">
+          <a href="tel:106" class="chip chip-tel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.85 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.77 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l.91-1.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg> 106</a>
+          <a href="https://wa.me/573007548933" target="_blank" class="chip chip-wa"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg> WhatsApp</a>
+          <a href="mailto:linea106@saludcapital.gov.co" class="chip chip-mail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg> Correo</a>
+        </div>
+      </div>
+
+      <div class="linea-card lc-2">
+        <div class="linea-name">Línea Púrpura</div>
+        <div class="linea-desc">Orientación en casos de violencia contra las mujeres.</div>
+        <div class="linea-horario">24 horas, todos los días</div>
+        <div class="chips">
+          <a href="tel:018000112137" class="chip chip-tel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.85 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.77 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l.91-1.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg> 01 8000 112 137</a>
+          <a href="https://wa.me/573007551846" target="_blank" class="chip chip-wa"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg> WhatsApp</a>
+          <a href="mailto:lpurpura@sdmujer.gov.co" class="chip chip-mail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg> Correo</a>
+        </div>
+      </div>
+
+      <div class="linea-card lc-3">
+        <div class="linea-name">Línea Diversa</div>
+        <div class="linea-desc">Acompañamiento psicosocial para personas LGBTI, sus familias y redes de apoyo.</div>
+        <div class="linea-horario">Lun–Vie 8am–6pm · Sáb 10am–4pm</div>
+        <div class="chips">
+          <a href="https://wa.me/573108644214" target="_blank" class="chip chip-wa"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg> WhatsApp</a>
+          <a href="mailto:linea106@saludcapital.gov.co" class="chip chip-mail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg> Correo</a>
+        </div>
+      </div>
+
+      <div class="linea-card lc-4">
+        <div class="linea-name">Una llamada de vida</div>
+        <div class="linea-desc">Orientación y acceso a la justicia a través de las comisarías de familia.</div>
+        <div class="linea-horario">Todos los días 7am–7pm</div>
+        <div class="chips">
+          <a href="tel:6013808400" class="chip chip-tel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.85 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.77 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l.91-1.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg> 601 380 8400</a>
+          <a href="https://wa.me/573007548933" target="_blank" class="chip chip-wa"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg> WhatsApp</a>
+        </div>
+      </div>
+
+      <div class="linea-card lc-5">
+        <div class="linea-name">Línea Salvavidas</div>
+        <div class="linea-desc">Apoyo para niñas, niños y adolescentes en situaciones de crisis o discriminación.</div>
+        <div class="linea-horario">Lun–Vie 7am–7pm · Sáb 7am–12m</div>
+        <div class="chips">
+          <a href="tel:3117668666" class="chip chip-tel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.85 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.77 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l.91-1.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg> 311 766 8666</a>
+          <a href="https://wa.me/573117668666" target="_blank" class="chip chip-wa"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg> WhatsApp</a>
+          <a href="mailto:hablanoscontigo@sergioruiz.org" class="chip chip-mail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg> Correo</a>
+          <a href="https://instagram.com/sergioruizorg" target="_blank" class="chip chip-ig"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg> Instagram</a>
+        </div>
+      </div>
+    </div><!-- /lineas-grid -->
+
+    <button class="back-btn" onclick="hide('psico')">
+      <div class="back-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7C6FC4" stroke-width="2.2" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg></div>
+      <span>Volver al menú principal</span>
+    </button>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════
+  SEC 2 — SITUACIÓN JURÍDICA
+═══════════════════════════════════════ -->
+<div class="expanded" id="sec-juridico">
+  <div class="exp-hdr" style="background:linear-gradient(135deg,#7C6FC4,#5a4fa0);">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round"><polyline points="8 6 21 6"/><polyline points="8 12 21 12"/><polyline points="8 18 21 18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+    <h2>Situación jurídica</h2>
+  </div>
+  <div class="exp-body">
+
+    <div class="imp-box">
+      <div class="imp-title">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        ¿No sabes cómo comunicarte con tu juzgado?
+      </div>
+      <p>Puedes escribir al correo electrónico del juzgado o acudir presencialmente. El correo suele aparecer al final de los autos o providencias judiciales. Si no lo tienes, consulta el directorio de la Rama Judicial.</p>
+      <a href="https://portalhistorico.ramajudicial.gov.co/web/juzgados-de-ejecucion-de-penas-y-medidas-de-seguridad" target="_blank" class="dir-btn dir-lavanda" style="margin-top:0.8rem;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        Buscar mi juzgado en el directorio
+      </a>
+    </div>
+
+    <div class="sub-h">¿Tengo tiempos de redención pendientes?</div>
+    <p>Si consideras que tienes tiempos de redención pendientes por reconocer de cuando estuviste privada de la libertad, puedes diligenciar el formato de Solicitud de Reconocimiento de Tiempos de Redención.</p>
+    <a href="documentos/SOLICITUD_DE_RECONOCIMIENTO_DE_TIEMPOS_DE_REDENCION.odt" download class="fmt-btn">
+      <div class="fmt-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7C6FC4" stroke-width="1.8" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><polyline points="9 15 12 18 15 15"/></svg></div>
+      <div class="fmt-txt">
+        <strong>Solicitud de reconocimiento de tiempos de redención</strong>
+        <span>Formato editable — descarga aquí</span>
+      </div>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7C6FC4" stroke-width="2" stroke-linecap="round"><polyline points="8 17 12 21 16 17"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.88 18.09A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.29"/></svg>
+    </a>
+    <p style="margin-top:0.7rem;">Una vez diligenciado, envíalo al correo electrónico del juzgado que lleva tu caso o preséntalo presencialmente para su radicación.</p>
+
+    <div class="sub-h">Solicitud de libertad condicional</div>
+    <p>Si actualmente cumples una pena mediante prestación de servicios de utilidad pública, puedes solicitar la libertad condicional cuando hayas cumplido las <strong>tres quintas partes (3/5)</strong> de la condena impuesta.</p>
+
+    <div class="calc-wrap">
+      <div class="calc-title">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5a4fa0" stroke-width="2" stroke-linecap="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="7" x2="16" y2="7"/><line x1="8" y1="11" x2="16" y2="11"/><line x1="8" y1="15" x2="12" y2="15"/></svg>
+        ¿Cómo calcularlo?
+      </div>
+      <div class="calc-steps">
+        <div class="calc-step"><strong>Paso 1</strong>Total de tu condena</div>
+        <div class="calc-step"><strong style="color:var(--lavanda)">÷ 5</strong><br><span style="font-size:10px">Dividir entre 5</span></div>
+        <div class="calc-step"><strong style="color:var(--rosado)">× 3</strong><br><span style="font-size:10px">Multiplicar por 3</span></div>
+        <div class="calc-step"><strong style="color:var(--verde)">= Resultado</strong><span style="font-size:10px;display:block">Tiempo mínimo</span></div>
+      </div>
+      <p style="font-size:11.5px;color:var(--texto-suave);margin-bottom:0.7rem;">Ejemplo: condena de 10 años → 10 ÷ 5 = 2 → 2 × 3 = <strong>6 años</strong></p>
+      <div class="calc-input-row">
+        <label>Mi condena es de</label>
+        <select id="csel" onchange="calcular()">
+          <option value="">— elige —</option>
+          <option value="24">2 años (24 meses)</option>
+          <option value="36">3 años (36 meses)</option>
+          <option value="48">4 años (48 meses)</option>
+          <option value="60">5 años (60 meses)</option>
+          <option value="72">6 años (72 meses)</option>
+          <option value="84">7 años (84 meses)</option>
+          <option value="96">8 años (96 meses)</option>
+          <option value="108">9 años (108 meses)</option>
+          <option value="120">10 años (120 meses)</option>
+          <option value="144">12 años (144 meses)</option>
+          <option value="180">15 años (180 meses)</option>
+        </select>
+      </div>
+      <div class="calc-res" id="cres">
+        <div class="rl">Debes haber cumplido</div>
+        <div class="rv" id="crv">— meses</div>
+        <div class="rs" id="crs">Selecciona tu condena arriba</div>
+      </div>
+    </div>
+
+    <p>Para calcular este tiempo se tiene en cuenta: el tiempo físico cumplido, los tiempos de redención reconocidos y el tiempo cumplido mediante prestación de servicios de utilidad pública.</p>
+    <p><strong>Si cumples estas condiciones</strong>, descarga y diligencia el formato de Solicitud de Libertad Condicional:</p>
+    <a href="documentos/FORMATO_LIBERTAD_CONDICIONAL.odt" download class="fmt-btn">
+      <div class="fmt-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7C6FC4" stroke-width="1.8" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><polyline points="9 15 12 18 15 15"/></svg></div>
+      <div class="fmt-txt">
+        <strong>Solicitud de libertad condicional</strong>
+        <span>Formato editable — descarga aquí</span>
+      </div>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7C6FC4" stroke-width="2" stroke-linecap="round"><polyline points="8 17 12 21 16 17"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.88 18.09A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.29"/></svg>
+    </a>
+    <p style="margin-top:0.7rem;">Una vez diligenciado, envíalo al correo electrónico del juzgado que lleva tu caso o preséntalo presencialmente para su radicación.</p>
+
+    <button class="back-btn" onclick="hide('juridico')">
+      <div class="back-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7C6FC4" stroke-width="2.2" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg></div>
+      <span>Volver al menú principal</span>
+    </button>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════
+  SEC 3 — HORAS
+═══════════════════════════════════════ -->
+<div class="expanded" id="sec-horas">
+  <div class="exp-hdr" style="background:linear-gradient(135deg,#3DAB8E,#0F6E56);">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+    <h2>Mis horas de utilidad pública</h2>
+  </div>
+  <div class="exp-body">
+    <p>Puedes utilizar la calculadora del Sistema de Información de Utilidad Pública (SIUP) para obtener un estimado de las horas que aún te faltan por completar.</p>
+
+    <a href="https://siup.minjusticia.gov.co/#/public/calculadora-siup" target="_blank" class="dir-btn dir-verde">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+      Ir a la calculadora del SIUP
+    </a>
+
+    <div class="imp-box naranja-box" style="margin-top:1rem;">
+      <div class="imp-title naranja-t">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        ¡Importante!
+      </div>
+      <p>El resultado de la calculadora es únicamente una <strong>estimación</strong>. La única autoridad que puede indicar con exactitud cuántas horas tienes reconocidas y cuántas te faltan es el juez que lleva tu caso.</p>
+    </div>
+
+    <div class="sub-h">¿Cómo funciona el cálculo?</div>
+    <div class="step-list">
+      <div class="step-item">
+        <div class="step-num">1</div>
+        <div class="step-txt">
+          <strong>Ingresa al SIUP</strong>
+          <span>Accede a la calculadora con el link de arriba.</span>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">2</div>
+        <div class="step-txt">
+          <strong>Registra tu información</strong>
+          <span>Introduce los datos que te solicita el sistema.</span>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">3</div>
+        <div class="step-txt">
+          <strong>Revisa el estimado</strong>
+          <span>El sistema te mostrará un estimado de las horas pendientes.</span>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">4</div>
+        <div class="step-txt">
+          <strong>Confirma con tu juzgado</strong>
+          <span>Si necesitas saber el número exacto, presenta un memorial ante tu juzgado.</span>
+        </div>
+      </div>
+    </div>
+
+    <p style="margin-top:0.6rem;">Si necesitas conocer esta información con certeza, puedes presentar una solicitud ante tu juzgado para que te informe el número de horas certificadas y el tiempo pendiente.</p>
+
+    <div class="imp-box" style="margin-top:1rem;">
+      <div class="imp-title">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        ¿No sabes cómo comunicarte con tu juzgado?
+      </div>
+      <p>Puedes escribir al correo electrónico del juzgado o acudir presencialmente. El correo suele aparecer al final de los autos o providencias judiciales. Si no lo tienes, consulta el directorio de la Rama Judicial.</p>
+      <a href="https://portalhistorico.ramajudicial.gov.co/web/juzgados-de-ejecucion-de-penas-y-medidas-de-seguridad" target="_blank" class="dir-btn dir-lavanda" style="margin-top:0.6rem;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        Buscar mi juzgado en el directorio
+      </a>
+    </div>
+    <a href="documentos/Formato_Solicitud_de_Computo_de_Horas.docx" download class="fmt-btn">
+      <div class="fmt-ico verde"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3DAB8E" stroke-width="1.8" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><polyline points="9 15 12 18 15 15"/></svg></div>
+      <div class="fmt-txt">
+        <strong>Formato de solicitud al juzgado</strong>
+        <span>Formato editable — descarga aquí</span>
+      </div>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3DAB8E" stroke-width="2" stroke-linecap="round"><polyline points="8 17 12 21 16 17"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.88 18.09A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.29"/></svg>
+    </a>
+
+    <button class="back-btn" onclick="hide('horas')">
+      <div class="back-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7C6FC4" stroke-width="2.2" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg></div>
+      <span>Volver al menú principal</span>
+    </button>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════
+  SEC 4 — CAMBIOS
+═══════════════════════════════════════ -->
+<div class="expanded" id="sec-cambios">
+  <div class="exp-hdr" style="background:linear-gradient(135deg,#E8854A,#c06030);">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+    <h2>Cambiar condiciones de mis servicios</h2>
+  </div>
+  <div class="exp-body">
+    <p>Si necesitas realizar algún cambio en tus condiciones, debes comunicarte con el juzgado que lleva tu caso. Descarga el formato que corresponda, complétalo y envíalo al correo de tu juzgado o preséntalo presencialmente.</p>
+
+    <div class="imp-box rosado-box">
+      <div class="imp-title rosado-t">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        Recuerda
+      </div>
+      <p>Estos formatos sirven como orientación. Adáptalos a tu situación particular y completa la información que corresponda a tu caso.</p>
+    </div>
+
+    <div class="sub-h">Cambio de plaza</div>
+    <p>Si deseas realizar tus actividades en una plaza diferente, debes solicitar autorización al juez <strong>antes</strong> de efectuar el cambio. Recuerda que tu solicitud debe estar debidamente justificada. Si ya conoces la nueva plaza, inclúyela; si no, puedes pedir que se te asigne una cercana a tu lugar de residencia.</p>
+    <div class="imp-box naranja-box" style="margin-bottom:0.6rem;">
+      <div class="imp-title naranja-t">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Adjunta verificación de dirección
+      </div>
+      <p>Es obligatorio adjuntar un documento que permita verificar tu nueva dirección, como un recibo de servicio público.</p>
+    </div>
+    <a href="documentos/FORMATO_CAMBIO_DE_PLAZA.odt" download class="fmt-btn">
+      <div class="fmt-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7C6FC4" stroke-width="1.8" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+      <div class="fmt-txt">
+        <strong>Solicitud de cambio de plaza</strong>
+        <span>Formato editable — descarga aquí</span>
+      </div>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7C6FC4" stroke-width="2" stroke-linecap="round"><polyline points="8 17 12 21 16 17"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.88 18.09A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.29"/></svg>
+    </a>
+
+    <div class="sub-h" style="margin-top:1.5rem;">Cambio de domicilio</div>
+    <p>Si cambiaste de residencia, debes informar esta novedad al juzgado, incluso si el cambio fue dentro del mismo barrio o conjunto.</p>
+    <div class="imp-box naranja-box" style="margin-bottom:0.6rem;">
+      <div class="imp-title naranja-t">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Adjunta verificación de dirección
+      </div>
+      <p>Debes adjuntar un documento que permita verificar tu nueva dirección, como un recibo de servicio público.</p>
+    </div>
+    <a href="documentos/CAMBIO_DE_DOMICILIO.odt" download class="fmt-btn">
+      <div class="fmt-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7C6FC4" stroke-width="1.8" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+      <div class="fmt-txt">
+        <strong>Formato de cambio de domicilio</strong>
+        <span>Formato editable — descarga aquí</span>
+      </div>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7C6FC4" stroke-width="2" stroke-linecap="round"><polyline points="8 17 12 21 16 17"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.88 18.09A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.29"/></svg>
+    </a>
+
+    <div class="sub-h" style="margin-top:1.5rem;">Cambio de actividades y horas</div>
+    <p>Si requieres cambiar las actividades asignadas, la distribución de las horas o alguna otra condición de tu plan de trabajo, explica de manera clara y detallada las razones que justifican el cambio. Se recomienda que esta solicitud sea firmada tanto por ti como por la entidad donde realizas los servicios.</p>
+    <a href="documentos/Solicitud_de_cambio_de_actividades_y_horas.odt" download class="fmt-btn">
+      <div class="fmt-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7C6FC4" stroke-width="1.8" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+      <div class="fmt-txt">
+        <strong>Solicitud de cambio de actividades y horas</strong>
+        <span>Formato editable — descarga aquí</span>
+      </div>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7C6FC4" stroke-width="2" stroke-linecap="round"><polyline points="8 17 12 21 16 17"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.88 18.09A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.29"/></svg>
+    </a>
+
+    <button class="back-btn" onclick="hide('cambios')">
+      <div class="back-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7C6FC4" stroke-width="2.2" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg></div>
+      <span>Volver al menú principal</span>
+    </button>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════
+  SEC 5 — EPS
+═══════════════════════════════════════ -->
+<div class="expanded" id="sec-eps">
+  <div class="exp-hdr" style="background:linear-gradient(135deg,#c0392b,#8e1a10);">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+    <h2>Dificultades con mi EPS</h2>
+  </div>
+  <div class="exp-body">
+
+    <div class="sub-h">¿No te han desafiliado del sistema de salud tras salir de intramural?</div>
+    <p>Debes diligenciar el siguiente formato y radicarlo en el INPEC.</p>
+    <a href="documentos/Modelo_desafiliacion_Seguridad_Social.docx" download class="fmt-btn">
+      <div class="fmt-ico rosado"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#E07090" stroke-width="1.8" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><polyline points="9 15 12 18 15 15"/></svg></div>
+      <div class="fmt-txt">
+        <strong>Formato de desafiliación — INPEC</strong>
+        <span>Formato editable — descarga aquí</span>
+      </div>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E07090" stroke-width="2" stroke-linecap="round"><polyline points="8 17 12 21 16 17"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.88 18.09A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.29"/></svg>
+    </a>
+
+    <div class="sub-h" style="margin-top:1.5rem;">¿No te entregan medicamentos, citas u otras dificultades?</div>
+    <p>Debes diligenciar un derecho de petición y radicarlo en tu EPS solicitando respuesta y solución a tu situación.</p>
+    <a href="documentos/Derecho_de_peticion_EPS.docx" download class="fmt-btn">
+      <div class="fmt-ico rosado"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#E07090" stroke-width="1.8" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><polyline points="9 15 12 18 15 15"/></svg></div>
+      <div class="fmt-txt">
+        <strong>Derecho de petición EPS</strong>
+        <span>Formato editable — descarga aquí</span>
+      </div>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E07090" stroke-width="2" stroke-linecap="round"><polyline points="8 17 12 21 16 17"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.88 18.09A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.29"/></svg>
+    </a>
+
+    <button class="back-btn" onclick="hide('eps')">
+      <div class="back-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7C6FC4" stroke-width="2.2" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg></div>
+      <span>Volver al menú principal</span>
+    </button>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════
+  SEC 6 — SISBÉN
+═══════════════════════════════════════ -->
+<div class="expanded" id="sec-sisben">
+  <div class="exp-hdr" style="background:linear-gradient(135deg,#3a86c8,#1a5fa0);">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+    <h2>Afiliarme al SISBÉN</h2>
+  </div>
+  <div class="exp-body">
+    <p>El SISBÉN es una herramienta del Estado que identifica las condiciones socioeconómicas de los hogares para facilitar el acceso a programas y subsidios. Si no estás registrada, puedes solicitar la encuesta siguiendo estos pasos:</p>
+
+    <div class="step-list">
+      <div class="step-item">
+        <div class="step-num" style="background:#3a86c8">1</div>
+        <div class="step-txt">
+          <strong>Solicitar la encuesta</strong>
+          <span>Dirígete presencialmente a la Alcaldía de tu municipio con tu cédula de ciudadanía y solicita la entrevista SISBÉN IV.</span>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num" style="background:#3a86c8">2</div>
+        <div class="step-txt">
+          <strong>Encuesta en casa</strong>
+          <span>Un funcionario visitará tu hogar para aplicar la encuesta SISBÉN IV.</span>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num" style="background:#3a86c8">3</div>
+        <div class="step-txt">
+          <strong>Consultar el resultado</strong>
+          <span>Una vez procesada, puedes consultar tu puntaje en el portal oficial del SISBÉN o llamando a la alcaldía de tu municipio.</span>
+        </div>
+      </div>
+    </div>
+
+    <p style="font-size:12.5px;color:var(--texto-suave);margin-top:0.5rem;">En este portal podrás encontrar la dirección y número de teléfono de la oficina del SISBÉN correspondiente a tu lugar de residencia.</p>
+    <a href="https://www.sisben.gov.co/Paginas/oficinas-regionales.html" target="_blank" class="dir-btn" style="background:#E8F2FD;color:#1a5fa0;margin-top:0.5rem;">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+      Ir al portal oficial del SISBÉN
+    </a>
+
+    <button class="back-btn" onclick="hide('sisben')">
+      <div class="back-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7C6FC4" stroke-width="2.2" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg></div>
+      <span>Volver al menú principal</span>
+    </button>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════
+  SEC 7 — CÉDULA
+═══════════════════════════════════════ -->
+<div class="expanded" id="sec-cedula">
+  <div class="exp-hdr" style="background:linear-gradient(135deg,#c49a0a,#8a6a00);">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round"><rect x="2" y="5" width="20" height="14" rx="2"/><circle cx="8" cy="12" r="2"/><path d="M14 9h4M14 12h4M14 15h2"/></svg>
+    <h2>Duplicado de mi cédula</h2>
+  </div>
+  <div class="exp-body">
+    <p>Para solicitar el duplicado de tu cédula, debes diligenciar el siguiente formato y enviarlo al correo <strong>utilidadpublica@minjusticia.gov.co</strong> para que podamos gestionar la solicitud correspondiente. A través del equipo de Utilidad Pública podemos agilizar el proceso de radicación del documento.</p>
+    <a href="documentos/Formato_RAFT.xlsx" download class="fmt-btn">
+      <div class="fmt-ico" style="background:#FEF9E7"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#b8860b" stroke-width="1.8" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><polyline points="9 15 12 18 15 15"/></svg></div>
+      <div class="fmt-txt">
+        <strong>Formato RAF — Solicitud de cédula</strong>
+        <span>Formato editable — descarga aquí</span>
+      </div>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#b8860b" stroke-width="2" stroke-linecap="round"><polyline points="8 17 12 21 16 17"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.88 18.09A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.29"/></svg>
+    </a>
+    <a href="mailto:utilidadpublica@minjusticia.gov.co" class="dir-btn" style="background:#FEF9E7;color:#8a6a00;margin-top:0.5rem;">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      Enviar al correo de Ministerio de Justicia
+    </a>
+    <button class="back-btn" onclick="hide('cedula')">
+      <div class="back-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7C6FC4" stroke-width="2.2" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg></div>
+      <span>Volver al menú principal</span>
+    </button>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════
+  SEC 8 — EMPRENDIMIENTO
+═══════════════════════════════════════ -->
+<div class="expanded" id="sec-emprendimiento">
+  <div class="exp-hdr" style="background:linear-gradient(135deg,#3DAB8E,#0F6E56);">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M12 2a2.5 2.5 0 0 1 0 5 2.5 2.5 0 0 1 0-5z"/><path d="M12 17a2.5 2.5 0 0 1 0 5 2.5 2.5 0 0 1 0-5z"/><path d="M2 12a2.5 2.5 0 0 1 5 0 2.5 2.5 0 0 1-5 0z"/><path d="M17 12a2.5 2.5 0 0 1 5 0 2.5 2.5 0 0 1-5 0z"/></svg>
+    <h2>Fortalecer mi emprendimiento</h2>
+  </div>
+  <div class="exp-body">
+    <p>Aquí encontrarás diversas convocatorias dirigidas a mujeres con espíritu emprendedor. Te recomendamos visitar el portal del Fondo Mujer Libre y Productiva.</p>
+
+    <div class="emp-preview">
+      <h3>Fondo Mujer Libre y Productiva</h3>
+      <p>Programas enfocados en el fortalecimiento económico y la autonomía de las mujeres.</p>
+      <div class="emp-tags">
+        <span class="emp-tag">Inclusión financiera</span>
+        <span class="emp-tag">Formación técnica</span>
+        <span class="emp-tag">Autonomía económica</span>
+        <span class="emp-tag">Convocatorias abiertas</span>
+      </div>
+      <a href="https://fondomujer.gov.co/" target="_blank" class="dir-btn" style="background:rgba(255,255,255,0.18);color:white;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        Ir al portal del Fondo Mujer Libre y Productiva
+      </a>
+    </div>
+
+    <button class="back-btn" onclick="hide('emprendimiento')">
+      <div class="back-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7C6FC4" stroke-width="2.2" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg></div>
+      <span>Volver al menú principal</span>
+    </button>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════
+  SEC 9 — HOJA DE VIDA
+═══════════════════════════════════════ -->
+<div class="expanded" id="sec-hoja">
+  <div class="exp-hdr" style="background:linear-gradient(135deg,#7C6FC4,#5a4fa0);">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+    <h2>Cómo hacer mi hoja de vida</h2>
+  </div>
+  <div class="exp-body">
+    <p>Aquí encontrarás una guía detallada con ejemplos y una plantilla para elaborar tu hoja de vida en formato ATS, que te ayudará a presentarla de manera clara y organizada.</p>
+
+    <div class="sub-h">¿Cómo usar la plantilla de Canva?</div>
+    <div class="step-list">
+      <div class="step-item">
+        <div class="step-num" style="background:#7C6FC4">1</div>
+        <div class="step-txt">
+          <strong>Abre la plantilla</strong>
+          <span>Haz clic en el botón "Plantilla en Canva" de abajo. Se abrirá en tu navegador o en la app de Canva.</span>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num" style="background:#7C6FC4">2</div>
+        <div class="step-txt">
+          <strong>Crea una cuenta o inicia sesión</strong>
+          <span>Si no tienes cuenta en Canva, puedes crear una gratis con tu correo electrónico.</span>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num" style="background:#7C6FC4">3</div>
+        <div class="step-txt">
+          <strong>Haz tu copia</strong>
+          <span>Haz clic en "Usar plantilla" para crear tu propia copia editable sin modificar el original.</span>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num" style="background:#7C6FC4">4</div>
+        <div class="step-txt">
+          <strong>Completa tu información</strong>
+          <span>Reemplaza los textos de ejemplo con tus datos: nombre, experiencia, estudios y habilidades.</span>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num" style="background:#7C6FC4">5</div>
+        <div class="step-txt">
+          <strong>Descarga en PDF</strong>
+          <span>Cuando esté lista, descárgala como PDF desde el botón "Compartir" en la esquina superior derecha.</span>
+        </div>
+      </div>
+    </div>
+
+    <a href="documentos/Guia_de_elaboracion_hoja_de_vida.pdf" download class="fmt-btn">
+      <div class="fmt-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7C6FC4" stroke-width="1.8" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><polyline points="9 15 12 18 15 15"/></svg></div>
+      <div class="fmt-txt">
+        <strong>Guía de elaboración de hoja de vida</strong>
+        <span>Descarga aquí</span>
+      </div>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7C6FC4" stroke-width="2" stroke-linecap="round"><polyline points="8 17 12 21 16 17"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.88 18.09A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.29"/></svg>
+    </a>
+
+    <a href="https://canva.link/hjmkdk073uyhcii" target="_blank" class="fmt-btn" style="margin-top:0.6rem;">
+      <div class="fmt-ico" style="background:#E8F4FD"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3a86c8" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6M9 12h6M9 15h4"/></svg></div>
+      <div class="fmt-txt">
+        <strong>Plantilla en Canva — Formato ATS</strong>
+        <span>Editable y descargable</span>
+      </div>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3a86c8" stroke-width="2" stroke-linecap="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+    </a>
+
+    <div class="imp-box" style="margin-top:1rem;">
+      <div class="imp-title">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        Envía tu hoja de vida
+      </div>
+      <p>Una vez lista, envíala a <strong>practicasutilidadpublica@minjusticia.gov.co</strong> para ser incluida en el banco de hojas de vida. El envío no garantiza vinculación laboral, pero te pone en el radar cuando surgen oportunidades.</p>
+    </div>
+    <a href="mailto:practicasutilidadpublica@minjusticia.gov.co" class="dir-btn dir-lavanda" style="margin-top:0.4rem;">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      Enviar hoja de vida al banco
+    </a>
+
+    <button class="back-btn" onclick="hide('hoja')">
+      <div class="back-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7C6FC4" stroke-width="2.2" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg></div>
+      <span>Volver al menú principal</span>
+    </button>
+  </div>
+</div>
+
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="footer-bfly">
+    <svg width="36" height="30" viewBox="0 0 60 50" fill="none">
+      <path d="M30 26 C20 12 2 8 1 18 C-1 27 14 32 30 26Z" fill="#7C6FC4"/>
+      <path d="M30 26 C40 12 58 8 59 18 C61 27 46 32 30 26Z" fill="#7C6FC4"/>
+      <path d="M30 26 C19 34 3 37 2 28 C1 21 16 19 30 26Z" fill="#F2A0B0"/>
+      <path d="M30 26 C41 34 57 37 58 28 C59 21 44 19 30 26Z" fill="#F2A0B0"/>
+      <ellipse cx="30" cy="26" rx="2.5" ry="4" fill="#3D2B1F"/>
+      <line x1="30" y1="22" x2="26" y2="15" stroke="#3D2B1F" stroke-width="1.2" stroke-linecap="round"/>
+      <line x1="30" y1="22" x2="34" y2="15" stroke="#3D2B1F" stroke-width="1.2" stroke-linecap="round"/>
+      <circle cx="26" cy="14" r="1.5" fill="#3D2B1F"/>
+      <circle cx="34" cy="14" r="1.5" fill="#3D2B1F"/>
+    </svg>
+  </div>
+  <p>Esta página es una guía de orientación.<br>La información aquí contenida no reemplaza la asesoría jurídica profesional.</p>
+</div>
+
+</div><!-- /page -->
+
+<script>
+/* ══ CANVAS MARIPOSAS — silueta real ══ */
+(function(){
+  const canvas = document.getElementById('bfly-canvas');
+  const ctx = canvas.getContext('2d');
+  let W, H;
+
+  const COLORS = [
+    ['#7C6FC4','#B8AEE8'],
+    ['#E07090','#F4B8C8'],
+    ['#3DAB8E','#90D9C8'],
+    ['#E8854A','#F4C09A'],
+  ];
+
+  function resize(){ W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+  window.addEventListener('resize', resize); resize();
+
+  function rand(a,b){ return a + Math.random()*(b-a); }
+
+  function makeBfly(){
+    const c = COLORS[Math.floor(Math.random()*COLORS.length)];
+    return {
+      x: rand(0,W), y: rand(H*0.2, H*1.1),
+      vx: rand(-0.3,0.3), vy: rand(-0.6,-0.15),
+      size: rand(18,38),
+      flap: rand(0, Math.PI*2),
+      flapSpd: rand(0.05,0.1),
+      c1: c[0], c2: c[1],
+      opacity: rand(0.04,0.09),
+      wobX: rand(-0.002,0.002),
+      wobY: rand(-0.003,0.001),
+    };
+  }
+
+  const bflys = Array.from({length:20}, makeBfly);
+
+  function drawBfly(b){
+    const s = b.size;
+    /* wing scale: 1 = open, ~0 = closed */
+    const ws = Math.abs(Math.cos(b.flap));
+    ctx.save();
+    ctx.translate(b.x, b.y);
+    ctx.globalAlpha = b.opacity;
+
+    /* Upper wings — bigger, rounder */
+    ctx.save();
+    ctx.scale(ws, 1);
+
+    // left upper
+    ctx.beginPath();
+    ctx.moveTo(0, 0);
+    ctx.bezierCurveTo(-s*0.6, -s*1.1, -s*2.0, -s*1.0, -s*2.0, -s*0.1);
+    ctx.bezierCurveTo(-s*2.0,  s*0.4, -s*0.8,  s*0.5,  0, s*0.2);
+    ctx.fillStyle = b.c1; ctx.fill();
+
+    // right upper
+    ctx.beginPath();
+    ctx.moveTo(0, 0);
+    ctx.bezierCurveTo( s*0.6, -s*1.1,  s*2.0, -s*1.0,  s*2.0, -s*0.1);
+    ctx.bezierCurveTo( s*2.0,  s*0.4,  s*0.8,  s*0.5,  0, s*0.2);
+    ctx.fillStyle = b.c1; ctx.fill();
+
+    /* Lower wings — smaller, rounded teardrop */
+    // left lower
+    ctx.beginPath();
+    ctx.moveTo(0, s*0.15);
+    ctx.bezierCurveTo(-s*0.5,  s*0.3, -s*1.6,  s*0.5, -s*1.5,  s*1.1);
+    ctx.bezierCurveTo(-s*1.4,  s*1.5, -s*0.4,  s*1.3,  0,  s*0.9);
+    ctx.fillStyle = b.c2; ctx.fill();
+
+    // right lower
+    ctx.beginPath();
+    ctx.moveTo(0, s*0.15);
+    ctx.bezierCurveTo( s*0.5,  s*0.3,  s*1.6,  s*0.5,  s*1.5,  s*1.1);
+    ctx.bezierCurveTo( s*1.4,  s*1.5,  s*0.4,  s*1.3,  0,  s*0.9);
+    ctx.fillStyle = b.c2; ctx.fill();
+
+    ctx.restore();
+
+    /* Body */
+    ctx.beginPath();
+    ctx.ellipse(0, s*0.45, s*0.11, s*0.55, 0, 0, Math.PI*2);
+    ctx.fillStyle = '#3D2B1F';
+    ctx.globalAlpha = b.opacity * 1.5;
+    ctx.fill();
+
+    /* Antennae */
+    ctx.globalAlpha = b.opacity * 1.2;
+    ctx.strokeStyle = '#3D2B1F';
+    ctx.lineWidth = s * 0.04;
+    ctx.lineCap = 'round';
+    // left antenna
+    ctx.beginPath(); ctx.moveTo(0,-s*0.05); ctx.quadraticCurveTo(-s*0.5,-s*0.8,-s*0.7,-s*1.1); ctx.stroke();
+    ctx.beginPath(); ctx.arc(-s*0.7,-s*1.1, s*0.08, 0, Math.PI*2); ctx.fillStyle='#3D2B1F'; ctx.fill();
+    // right antenna
+    ctx.beginPath(); ctx.moveTo(0,-s*0.05); ctx.quadraticCurveTo( s*0.5,-s*0.8, s*0.7,-s*1.1); ctx.stroke();
+    ctx.beginPath(); ctx.arc( s*0.7,-s*1.1, s*0.08, 0, Math.PI*2); ctx.fill();
+
+    ctx.restore();
+  }
+
+  function tick(){
+    ctx.clearRect(0,0,W,H);
+    for(const b of bflys){
+      b.flap += b.flapSpd;
+      b.vx = Math.max(-0.5, Math.min(0.5, b.vx + b.wobX));
+      b.vy = Math.max(-0.7, Math.min(-0.08, b.vy + b.wobY));
+      b.x += b.vx; b.y += b.vy;
+      if(b.y < -80 || b.x < -100 || b.x > W+100){
+        Object.assign(b, makeBfly());
+        b.y = H + 40; b.x = rand(0,W);
+      }
+      drawBfly(b);
+    }
+    requestAnimationFrame(tick);
+  }
+  tick();
+})();
+
+/* ══ NAV ══ */
+function show(id){
+  document.getElementById('main-menu').style.display='none';
+  document.querySelector('.greeting').style.display='none';
+  document.querySelector('.section-label').style.display='none';
+  const s=document.getElementById('sec-'+id);
+  s.style.display='block'; s.style.animation='none';
+  s.offsetHeight; s.style.animation='slideUp 0.35s ease both';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function hide(id){
+  document.getElementById('sec-'+id).style.display='none';
+  document.getElementById('main-menu').style.display='grid';
+  document.querySelector('.greeting').style.display='block';
+  document.querySelector('.section-label').style.display='block';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+/* ══ CALCULADORA ══ */
+function calcular(){
+  const v=parseInt(document.getElementById('csel').value); if(!v)return;
+  const m=Math.ceil(v/5*3);
+  const a=Math.floor(m/12), r=m%12;
+  document.getElementById('crv').textContent=m+' meses';
+  const sub=(a>0?a+' año'+(a>1?'s':''):'')+(a>0&&r>0?' y ':'')+(r>0?r+' mes'+(r>1?'es':''):'');
+  document.getElementById('crs').textContent=sub||'';
+  const el=document.getElementById('cres');
+  el.style.animation='none'; el.offsetHeight; el.style.animation='slideUp 0.3s ease both';
+}
+</script>
+</body>
+</html>
