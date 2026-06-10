@@ -1417,7 +1417,11 @@ function show(id){
   s.style.display='block'; s.style.animation='none';
   s.offsetHeight; s.style.animation='slideUp 0.35s ease both';
   window.scrollTo({top:0,behavior:'smooth'});
+
+  // Le avisa al celular/computador que guarde este paso en el historial
+  history.pushState({ activeSectionId: id }, "");
 }
+
 function hide(id){
   document.getElementById('sec-'+id).style.display='none';
   document.getElementById('main-menu').style.display='grid';
@@ -1426,6 +1430,25 @@ function hide(id){
   window.scrollTo({top:0,behavior:'smooth'});
 }
 
+// Esta función oculta cualquier sección que esté abierta actualmente
+function hideAllActive() {
+  const openSections = document.querySelectorAll('.expanded, [id^="sec-"]');
+  openSections.forEach(s => {
+    if (s.style.display === 'block') {
+      s.style.display = 'none';
+    }
+  });
+  document.getElementById('main-menu').style.display='grid';
+  document.querySelector('.greeting').style.display='block';
+  document.querySelector('.section-label').style.display='block';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// Detecta cuando el usuario usa la flecha del navegador o el botón físico del celular
+window.onpopstate = function(event) {
+  hideAllActive();
+};
+  
 /* ══ CALCULADORA ══ */
 function calcular(){
   const v=parseInt(document.getElementById('csel').value); if(!v)return;
